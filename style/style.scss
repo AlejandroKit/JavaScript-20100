@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(../images/fondo4.jpg);
+    background-size: cover;
+    background-position: center
+}
+
+@import "sass/header";
+@import "sass/main";

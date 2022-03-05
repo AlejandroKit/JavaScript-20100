@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url(../images/fondo4.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+header {
+  background-color: #000;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: 0 0 1em #7df;
+  display: flex;
+  align-items: flex-end;
+}
+
+header .logo {
+  height: 5em;
+  width: 5em;
+  border-top-left-radius: .7em;
+  border-bottom-left-radius: .7em;
+}
+
+header h1 {
+  display: inline-block;
+  margin: 0 .2em;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 5em;
+  line-height: 1;
+  flex-grow: 1;
+}
+
+header button {
+  background-color: #f7b;
+  color: #f08;
+  height: 2em;
+  margin-top: 1em;
+  padding: 5px;
+  border-radius: .5em;
+  border: none;
+}
+
+header button:hover {
+  cursor: pointer;
+}
+
+h2 {
+  background: linear-gradient(90deg, transparent 25%, #f5b, transparent 75%);
+  color: #fff;
+  font-size: 5em;
+  margin-bottom: .2em;
+  text-align: center;
+  text-shadow: 0 5px 5px #000;
+}
+
+.calender {
+  background-color: #fffc;
+  height: 100vh;
+  margin: 4em;
+  margin-top: 0;
+  border: 10px solid #555;
+  border-radius: 1em;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 2em repeat(5, 1fr);
+}
+
+.calender div {
+  padding: .3em;
+  border: 1px solid #666;
+}
+
+.calender .diasSemana {
+  color: #f5b;
+  padding: .5em;
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 1px 1px 2px #000;
+}
+/*# sourceMappingURL=style.css.map */

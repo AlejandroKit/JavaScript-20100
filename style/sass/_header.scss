@@ -1,0 +1,40 @@
+header {
+    background-color: #000;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    box-shadow: 0 0 1em #7df;
+    display: flex;
+    align-items: flex-end;
+
+    .logo {
+        height: 5em;
+        width: 5em;
+        border-top-left-radius: .7em;
+        border-bottom-left-radius: .7em;
+    }
+
+    h1 {
+        display: inline-block;
+        margin: 0 .2em;
+        color: #fff;
+        font-family: 'Playfair Display', serif;
+        font-size: 5em;
+        line-height: 1;
+        flex-grow: 1;
+    }
+
+    button {
+        background-color: #f7b;
+        color: #f08;
+        height: 2em;
+        margin-top: 1em;
+        padding: 5px;
+        border-radius: .5em;
+        border: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
