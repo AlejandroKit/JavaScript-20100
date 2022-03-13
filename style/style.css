@@ -14,34 +14,38 @@ header {
   margin: 1em;
   padding: 1em;
   border-radius: 1em;
-  box-shadow: 0 0 1em #7df;
+  outline: 3px solid #fff;
+  box-shadow: 0 0 1.5em #f0b;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
-header .logo {
-  height: 5em;
-  width: 5em;
+header .header__logo {
+  height: 7em;
+  width: 7em;
   border-top-left-radius: .7em;
   border-bottom-left-radius: .7em;
 }
 
-header h1 {
+header .header__titulo {
   display: inline-block;
   margin: 0 .2em;
   color: #fff;
-  font-family: 'Playfair Display', serif;
+  text-shadow: 0 0 .2em #f0b;
+  font-family: 'Cinzel', serif;
+  font-style: italic;
   font-size: 5em;
   line-height: 1;
   flex-grow: 1;
 }
 
 header button {
+  display: inline-block;
   background-color: #f7b;
   color: #f08;
-  height: 2em;
-  margin-top: 1em;
-  padding: 5px;
+  width: 100%;
+  margin: .2em;
+  padding: .5em;
   border-radius: .5em;
   border: none;
 }
@@ -72,16 +76,22 @@ h2 {
 }
 
 .calender div {
-  padding: .3em;
   border: 1px solid #666;
 }
 
-.calender .diasSemana {
+.calender .diaMes {
+  font-size: 1.2em;
+  padding: .2em;
+}
+
+.calender .diaSemana {
   color: #f5b;
-  padding: .5em;
+  font-size: 1.5em;
   font-family: 'Oswald', sans-serif;
   font-weight: bold;
-  text-align: center;
   text-shadow: 1px 1px 2px #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /*# sourceMappingURL=style.css.map */

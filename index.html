@@ -8,59 +8,66 @@
         <link rel="stylesheet" href="style/style.css" />
         <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Playfair+Display:ital@1&family=Teko:wght@500&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Playfair+Display:ital@1&family=Teko:wght@500&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Lora&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+        <link rel="icon" href="images/Greiff Calender-logos.jpeg" />
         <title>Pruebas de JS</title>
     </head>
     <body>
         <header>
-            <img class="logo" src="images/Greiff Calender-logos.jpeg" alt="" />
-            <h1 class="titulo">Greiff Calender</h1>
-            <button onclick="agendar()">Agendar evento</button>
+            <img class="header__logo" src="images/Greiff Calender-logos.jpeg" alt="" />
+            <h1 class="header__titulo">Greiff Calender</h1>
+            <ul class="listaBotones">
+                <li><button onclick="agendar()">Agendar evento</button></li>
+                <li><button onclick="eventos()">Ver eventos</button></li>
+                <li><button onclick="listaDeEventosFechaTitulo()">Ver fechas de eventos</button></li>
+            </ul>
         </header>
         <main>
             <h2>Marzo</h2>
             <div class="calender">
-                <div class="diasSemana"><span>Domingo</span></div>
-                <div class="diasSemana"><span>Lunes</span></div>
-                <div class="diasSemana"><span>Martes</span></div>
-                <div class="diasSemana"><span>Miércoles</span></div>
-                <div class="diasSemana"><span>Jueves</span></div>
-                <div class="diasSemana"><span>Viernes</span></div>
-                <div class="diasSemana"><span>Sábado</span></div>
-                <div class="diasMes"></div>
-                <div class="diasMes"></div>
-                <div class="diasMes">1</div>
-                <div class="diasMes">2</div>
-                <div class="diasMes">3</div>
-                <div class="diasMes">4</div>
-                <div class="diasMes">5</div>
-                <div class="diasMes">6</div>
-                <div class="diasMes">7</div>
-                <div class="diasMes">8</div>
-                <div class="diasMes">9</div>
-                <div class="diasMes">10</div>
-                <div class="diasMes">11</div>
-                <div class="diasMes">12</div>
-                <div class="diasMes">13</div>
-                <div class="diasMes">14</div>
-                <div class="diasMes">15</div>
-                <div class="diasMes">16</div>
-                <div class="diasMes">17</div>
-                <div class="diasMes">18</div>
-                <div class="diasMes">19</div>
-                <div class="diasMes">20</div>
-                <div class="diasMes">21</div>
-                <div class="diasMes">22</div>
-                <div class="diasMes">23</div>
-                <div class="diasMes">24</div>
-                <div class="diasMes">25</div>
-                <div class="diasMes">26</div>
-                <div class="diasMes">27</div>
-                <div class="diasMes">28</div>
-                <div class="diasMes">29</div>
-                <div class="diasMes">30</div>
-                <div class="diasMes">31</div>
-                <div class="diasMes"></div>
-                <div class="diasMes"></div>
+                <div class="diaSemana"><span>Domingo</span></div>
+                <div class="diaSemana"><span>Lunes</span></div>
+                <div class="diaSemana"><span>Martes</span></div>
+                <div class="diaSemana"><span>Miércoles</span></div>
+                <div class="diaSemana"><span>Jueves</span></div>
+                <div class="diaSemana"><span>Viernes</span></div>
+                <div class="diaSemana"><span>Sábado</span></div>
+                <div class="diaMes"></div>
+                <div class="diaMes"></div>
+                <div class="diaMes">1</div>
+                <div class="diaMes">2</div>
+                <div class="diaMes">3</div>
+                <div class="diaMes">4</div>
+                <div class="diaMes">5</div>
+                <div class="diaMes">6</div>
+                <div class="diaMes">7</div>
+                <div class="diaMes">8</div>
+                <div class="diaMes">9</div>
+                <div class="diaMes">10</div>
+                <div class="diaMes">11</div>
+                <div class="diaMes">12</div>
+                <div class="diaMes">13</div>
+                <div class="diaMes">14</div>
+                <div class="diaMes">15</div>
+                <div class="diaMes">16</div>
+                <div class="diaMes">17</div>
+                <div class="diaMes">18</div>
+                <div class="diaMes">19</div>
+                <div class="diaMes">20</div>
+                <div class="diaMes">21</div>
+                <div class="diaMes">22</div>
+                <div class="diaMes">23</div>
+                <div class="diaMes">24</div>
+                <div class="diaMes">25</div>
+                <div class="diaMes">26</div>
+                <div class="diaMes">27</div>
+                <div class="diaMes">28</div>
+                <div class="diaMes">29</div>
+                <div class="diaMes">30</div>
+                <div class="diaMes">31</div>
+                <div class="diaMes"></div>
+                <div class="diaMes"></div>
             </div>
         </main>
     </body>
