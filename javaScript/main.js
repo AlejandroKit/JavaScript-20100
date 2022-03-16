@@ -60,7 +60,7 @@ const agendar = () => {
         }
     } while (respuesta == false);
 
-    let nuevoEventoTitulo = prompt(`Titulo del evento??`);
+    let nuevoEventoTitulo = prompt('Titulo del evento??');
     let nuevoEventoDescr = prompt('Sobre que es el evento??');
 
     const eventoNuevo = new evento(nuevoEventoTitulo, nuevoEventoMes, nuevoEventoDia, nuevoEventoDescr);
@@ -77,5 +77,19 @@ const eventos = () => {
 const listaDeEventosFechaTitulo = () => {
     for (let i = 0; i < listaEventos.length; i++) {
         console.log(`${listaEventos[i].dia}/${listaEventos[i].mes}:${listaEventos[i].titulo}`);
+    }
+};
+
+const buscarEvento = () => {
+    let modoDeBusqueda = prompt('Como quieres buscar?? por mes o por titulo (escriba "mes" o "titulo")');
+
+    if ((modoDeBusqueda === 'mes') | (modoDeBusqueda === 'Mes')) {
+        let busqueda = parseInt(prompt('ingrese el mes cuyo eventos quiere ver'));
+        let resultado = listaEventos.filter((elem) => elem.mes == busqueda);
+        console.log(resultado);
+    } else if ((modoDeBusqueda === 'titulo') | (modoDeBusqueda === 'Titulo')) {
+        busqueda = prompt('ingrese el titulo cuyo eventos quiere ver');
+        resultado = listaEventos.filter((elem) => elem.titulo == busqueda);
+        console.log(resultado);
     }
 };
