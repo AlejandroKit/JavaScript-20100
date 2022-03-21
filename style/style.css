@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +12,7 @@ body {
 
 header {
   background-color: #000;
-  margin: 1em;
+  margin: 2em 4em;
   padding: 1em;
   border-radius: 1em;
   outline: 3px solid #fff;
@@ -54,44 +55,107 @@ header button:hover {
   cursor: pointer;
 }
 
-h2 {
+main {
+  height: 140vh;
+}
+
+.info {
   background: linear-gradient(90deg, transparent 25%, #f5b, transparent 75%);
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  padding: 0 3em;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+.info .mesAño {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.info .mesAño h2 {
   color: #fff;
   font-size: 5em;
-  margin-bottom: .2em;
-  text-align: center;
   text-shadow: 0 5px 5px #000;
 }
 
-.calender {
+.info .mesAño span {
+  color: #eee;
+  font-size: 2em;
+  text-shadow: 0 0 5px #000, 0 0 5px #000;
+}
+
+.info .calendarioPrev,
+.info .calendarioNext {
+  color: #fee;
+  text-shadow: 0 0 10px #f49, 0 0 12px #f49, 0 0 14px #f49, 0 0 15px #f49;
+  cursor: pointer;
+  font-size: 4em;
+}
+
+.info .calendarioPrev {
+  margin-right: auto;
+}
+
+.info .calendarioNext {
+  margin-left: auto;
+}
+
+.calendario {
   background-color: #fffc;
-  height: 100vh;
   margin: 4em;
   margin-top: 0;
   border: 10px solid #555;
   border-radius: 1em;
+}
+
+.calendario #dias {
+  margin: 1px 0;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 2em repeat(5, 1fr);
+  grid-gap: 1px;
 }
 
-.calender div {
-  border: 1px solid #666;
+.calendario #dias div {
+  border-top: 1px solid #666;
 }
 
-.calender .diaMes {
-  font-size: 1.2em;
+.calendario .calendario__dia {
+  height: 7em;
   padding: .2em;
+  font-weight: bold;
+  border: 1px solid #666;
+  overflow: hidden;
 }
 
-.calender .diaSemana {
+.calendario .calendario__hoy {
+  color: #f5b;
+  text-shadow: 0 0 2px #000, 1px 1px 2px #000;
+}
+
+.calendario .calendario__diasMesPasado {
+  color: #0007;
+}
+
+.calendario .semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendario .semana .diaSemana {
   color: #f5b;
   font-size: 1.5em;
   font-family: 'Oswald', sans-serif;
   font-weight: bold;
-  text-shadow: 1px 1px 2px #000;
+  text-shadow: 1px 1px 2px #000, 2px 2px 2px #000;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.calendario .semana div {
+  border: 1px solid #666;
 }
 /*# sourceMappingURL=style.css.map */

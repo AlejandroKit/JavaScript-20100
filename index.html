@@ -4,7 +4,6 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="javaScript/main.js"></script>
         <link rel="stylesheet" href="style/style.css" />
         <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Playfair+Display:ital@1&family=Teko:wght@500&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Playfair+Display:ital@1&family=Teko:wght@500&display=swap" rel="stylesheet" />
@@ -12,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Lora&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
         <link rel="icon" href="images/Greiff Calender-logos.jpeg" />
         <title>Pruebas de JS</title>
+        <!-- <script src="javaScript/main.js"></script> -->
     </head>
     <body>
         <header>
@@ -21,54 +21,32 @@
                 <li><button onclick="agendar()">Agendar evento</button></li>
                 <li><button onclick="eventos()">Ver eventos</button></li>
                 <li><button onclick="buscarEvento()">Buscar eventos</button></li>
+                <!-- <script src="javaScript/main.js"></script> -->
             </ul>
         </header>
         <main>
-            <h2>Marzo</h2>
-            <div class="calender">
-                <div class="diaSemana"><span>Domingo</span></div>
-                <div class="diaSemana"><span>Lunes</span></div>
-                <div class="diaSemana"><span>Martes</span></div>
-                <div class="diaSemana"><span>Miércoles</span></div>
-                <div class="diaSemana"><span>Jueves</span></div>
-                <div class="diaSemana"><span>Viernes</span></div>
-                <div class="diaSemana"><span>Sábado</span></div>
-                <div class="diaMes"></div>
-                <div class="diaMes"></div>
-                <div class="diaMes">1</div>
-                <div class="diaMes">2</div>
-                <div class="diaMes">3</div>
-                <div class="diaMes">4</div>
-                <div class="diaMes">5</div>
-                <div class="diaMes">6</div>
-                <div class="diaMes">7</div>
-                <div class="diaMes">8</div>
-                <div class="diaMes">9</div>
-                <div class="diaMes">10</div>
-                <div class="diaMes">11</div>
-                <div class="diaMes">12</div>
-                <div class="diaMes">13</div>
-                <div class="diaMes">14</div>
-                <div class="diaMes">15</div>
-                <div class="diaMes">16</div>
-                <div class="diaMes">17</div>
-                <div class="diaMes">18</div>
-                <div class="diaMes">19</div>
-                <div class="diaMes">20</div>
-                <div class="diaMes">21</div>
-                <div class="diaMes">22</div>
-                <div class="diaMes">23</div>
-                <div class="diaMes">24</div>
-                <div class="diaMes">25</div>
-                <div class="diaMes">26</div>
-                <div class="diaMes">27</div>
-                <div class="diaMes">28</div>
-                <div class="diaMes">29</div>
-                <div class="diaMes">30</div>
-                <div class="diaMes">31</div>
-                <div class="diaMes"></div>
-                <div class="diaMes"></div>
+            <div class="info">
+                <div class="calendarioPrev" id="prev-month">&#9664;</div>
+                <div class="mesAño">
+                    <h2 id="mes"></h2>
+                    <span id="año"></span>
+                </div>
+                <div class="calendarioNext" id="next-month">&#9654;</div>
+            </div>
+            <div class="calendario">
+                <div class="semana">
+                    <div class="diaSemana"><span>Lunes</span></div>
+                    <div class="diaSemana"><span>Martes</span></div>
+                    <div class="diaSemana"><span>Miércoles</span></div>
+                    <div class="diaSemana"><span>Jueves</span></div>
+                    <div class="diaSemana"><span>Viernes</span></div>
+                    <div class="diaSemana"><span>Sábado</span></div>
+                    <div class="diaSemana"><span>Domingo</span></div>
+                </div>
+
+                <div id="dias"></div>
             </div>
         </main>
+        <script src="javaScript/main.js"></script>
     </body>
 </html>

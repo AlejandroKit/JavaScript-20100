@@ -1,40 +1,106 @@
-h2 {
-    background: linear-gradient(90deg, transparent 25%, #f5b, transparent 75%);
-    color: #fff;
-    font-size: 5em;
-    margin-bottom: .2em;
-    text-align: center;
-    text-shadow: 0 5px 5px #000;
+main {
+    height: 140vh;
 }
 
-.calender {
+.info {
+    background: linear-gradient(90deg, transparent 25%, #f5b, transparent 75%);
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    padding: 0 3em;
+    font-size: 1.2em;
+    text-transform: uppercase;
+
+    .mesAño {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            color: #fff;
+            font-size: 5em;
+            text-shadow: 0 5px 5px #000;
+        }
+
+        span {
+            color: #eee;
+            font-size: 2em;
+            text-shadow: 0 0 5px #000, 0 0 5px #000;
+        }
+    }
+
+
+
+    .calendarioPrev,
+    .calendarioNext {
+        color: #fee;
+        text-shadow: 0 0 10px #f49, 0 0 12px #f49, 0 0 14px #f49, 0 0 15px #f49;
+        cursor: pointer;
+        font-size: 4em;
+    }
+
+    .calendarioPrev {
+        margin-right: auto;
+    }
+
+    .calendarioNext {
+        margin-left: auto;
+    }
+}
+
+.calendario {
     background-color: #fffc;
-    height: 100vh;
     margin: 4em;
     margin-top: 0;
     border: 10px solid #555;
     border-radius: 1em;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 2em repeat(5, 1fr);
 
-    div {
-        border: 1px solid #666;
+
+    #dias {
+        margin: 1px 0;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-gap: 1px;
+
+        div {
+            border-top: 1px solid #666;
+        }
     }
 
-    .diaMes {
-        font-size: 1.2em;
+    .calendario__dia {
+        height: 7em;
         padding: .2em;
+        font-weight: bold;
+        border: 1px solid #666;
+        overflow: hidden;
     }
 
-    .diaSemana {
+    .calendario__hoy {
         color: #f5b;
-        font-size: 1.5em;
-        font-family: 'Oswald', sans-serif;
-        font-weight: bold;
-        text-shadow: 1px 1px 2px #000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        text-shadow: 0 0 2px #000, 1px 1px 2px #000;
+    }
+
+    .calendario__diasMesPasado {
+        color: #0007;
+    }
+
+    .semana {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+
+        .diaSemana {
+            color: #f5b;
+            font-size: 1.5em;
+            font-family: 'Oswald', sans-serif;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000, 2px 2px 2px #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div {
+            border: 1px solid #666;
+        }
     }
 }
