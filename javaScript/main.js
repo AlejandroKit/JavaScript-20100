@@ -62,18 +62,18 @@ const escribirMes = (mes) => {
         if ((i === diaActual) & (mes === mesActualAux) & (añoActual === añoActualAux)) {
             dias.innerHTML += `<div class="calendario__dia calendario__item calendario__hoy">
             ${i}
-            <div class="dia__eventos" id="${i}/${mes}"></div>
+            <div class="dia__eventos" id="${i}/${mes + 1}"></div>
             </div>`;
         } else {
             dias.innerHTML += `<div class="calendario__dia calendario__item">
             ${i}
-            <div class="dia__eventos" id="${i}/${mes}"></div>
+            <div class="dia__eventos" id="${i}/${mes + 1}"></div>
             </div>`;
         }
     }
     // llamo a agregar al DOM todos los eventos del mes para que se impriman cada que aparece el mes
     listaEventos.forEach((evento) => {
-        if (evento.mes == mes) {
+        if (evento.mes == mes + 1) {
             evento.agregarAlCalendario();
         }
     });
@@ -178,7 +178,7 @@ const agendar = () => {
     listaEventos.push(eventoNuevo);
     eventoNuevo.agendarEvento();
     //este pequeño if es para que al agendar eventos en otro mes no vuelva a agregar al calendario eventos del mes que se esté viendo
-    if (nuevoEventoMes == mesActual) {
+    if (nuevoEventoMes == mesActual + 1) {
         eventoNuevo.agregarAlCalendario();
     }
 };
