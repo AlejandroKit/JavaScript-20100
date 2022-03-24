@@ -132,37 +132,37 @@ class evento {
     }
 }
 
+//Aqui selecciono el modal que quiero usar como formulario emergente para agendar el evento y el boton que lo va a "llamar a hacer pop-up" y aparecer
+let formContainer = document.getElementById('formContainer'); //container del formulario emergente
+let boton_1 = document.getElementById('openForm'); //boton de open para que emerga el formulario
+boton_1.addEventListener('click', () => {
+    //en esta funcion agrego la clase "show" al container para que le agregue opacity:1 y que se vea (visitar _header.scss para verlo)
+    formContainer.classList.add('show');
+});
+
+let cerrarVentana = document.getElementById('closeForm'); //selecciono la "X" del formulario para poder quitarle la clase "show" al container y que se vuelva invicible de nuevo
+cerrarVentana.addEventListener('click', () => {
+    formContainer.classList.remove('show');
+});
+
 //función para crear y agendar eventos
-const agendar = () => {
+let btn_agendar = document.getElementById('btnAgendar');
+btn_agendar.addEventListener('click', () => {
     let nuevoEventoMes;
     do {
-        nuevoEventoMes = prompt(`
-        En que mes quiere agendar??(ingrese el numero)
-        1.Enero
-        2.Febrero
-        3.Marzo
-        4.Abril
-        5.Mayo
-        6.Junio
-        7.Julio
-        8.Agosto
-        9.Septiembre
-        10.Octubre
-        11.Noviembre
-        12.Diciembre`);
+        nuevoEventoMes = document.getElementById('mes_inp').value;
         if (1 <= nuevoEventoMes && nuevoEventoMes <= 12) {
             respuesta = true;
         } else {
-            alert('Maestro, no hay tantos meses en el año, probá de nuevo');
+            nuevoEventoMes.innerHTML += 'No hay tantos meses';
+            document.getElementById('mes_inp').value = '';
             respuesta = false;
         }
     } while (respuesta == false);
-
     let cantDiasDelMes = cuantosDias(nuevoEventoMes);
-
     let nuevoEventoDia;
     do {
-        nuevoEventoDia = parseInt(prompt('En qué día quiere agregar un evento??'));
+        nuevoEventoDia = document.getElementById('dia_inp').value;
         if (0 < nuevoEventoDia && nuevoEventoDia <= cantDiasDelMes) {
             respuesta = true;
         } else {
@@ -170,10 +170,8 @@ const agendar = () => {
             respuesta = false;
         }
     } while (respuesta == false);
-
-    let nuevoEventoTitulo = prompt('Titulo del evento??');
-    let nuevoEventoDescr = prompt('Sobre que es el evento??');
-
+    let nuevoEventoTitulo = document.getElementById('titulo_inp').value;
+    let nuevoEventoDescr = document.getElementById('desc_inp').value;
     const eventoNuevo = new evento(nuevoEventoTitulo, nuevoEventoMes, nuevoEventoDia, nuevoEventoDescr);
     listaEventos.push(eventoNuevo);
     eventoNuevo.agendarEvento();
@@ -181,7 +179,31 @@ const agendar = () => {
     if (nuevoEventoMes == mesActual + 1) {
         eventoNuevo.agregarAlCalendario();
     }
-};
+
+    //limpio los inputs para que al agendar y volver a abrir el formulario esten todos los inputs vacios
+    document.getElementById('mes_inp').value = '';
+    document.getElementById('dia_inp').value = '';
+    document.getElementById('titulo_inp').value = '';
+    document.getElementById('desc_inp').value = '';
+    //esto es para que al agendar evento tambien desaparezca el formulario
+    formContainer.classList.remove('show');
+});
+
+let listContainer = document.getElementById('eventListContainer');
+let boton_2 = document.getElementById('openList');
+boton_2.addEventListener('click', () => {
+    listContainer.classList.add('show');
+
+    let fechasTitulos = document.getElementById('listaFechasTitulos');
+    listaEventos.forEach((evento) => {
+        fechasTitulos.innerHTML += `<li>${evento.dia}/${evento.mes}:${evento.titulo}</li>`;
+    });
+
+    let closeList = document.getElementById('closeList');
+    closeList.addEventListener('click', () => {
+        listContainer.classList.remove('show');
+    });
+});
 
 //función para imprimir una lista de los eventos agendados
 const eventos = () => {

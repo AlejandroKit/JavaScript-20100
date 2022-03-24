@@ -14,13 +14,32 @@
         <!-- <script src="javaScript/main.js"></script> -->
     </head>
     <body>
-        <header>
+        <header id="header">
+            <div id="formContainer" class="header__modalContainer">
+                <form action="">
+                    <button id="closeForm" type="button">X</button>
+                    <span>Mes:</span>
+                    <input id="mes_inp" type="text" autocomplete="off" />
+                    <span class="form__span-margin">Día:</span>
+                    <input id="dia_inp" type="text" autocomplete="off" />
+                    <span class="form__span-margin">Titulo:</span>
+                    <input id="titulo_inp" type="text" autocomplete="off" />
+                    <span class="form__span-margin">Descripción:</span>
+                    <textarea name="" id="desc_inp" cols="30" rows="10" autocomplete="off"></textarea>
+                    <button id="btnAgendar" type="button">Enviar</button>
+                </form>
+            </div>
+            <div id="eventListContainer" class="header__modalContainer">
+                <ul id="listaFechasTitulos">
+                    <button id="closeList" type="button">X</button>
+                </ul>
+            </div>
             <img class="header__logo" src="images/Greiff Calender-logos.jpeg" alt="" />
             <h1 class="header__titulo">Greiff Calender</h1>
             <ul class="listaBotones">
-                <li><button onclick="agendar()">Agendar evento</button></li>
-                <li><button onclick="eventos()">Ver eventos</button></li>
-                <li><button onclick="buscarEvento()">Buscar eventos</button></li>
+                <li><button id="openForm">Agendar evento</button></li>
+                <li><button id="openList">Ver eventos</button></li>
+                <li><button id="btn-3">Buscar eventos</button></li>
                 <!-- <script src="javaScript/main.js"></script> -->
             </ul>
         </header>
