@@ -163,6 +163,44 @@ header {
                 list-style: none;
             }
         }
+
+        .buscadorBody {
+            background-color: #000;
+            height: 35em;
+            width: 35em;
+            padding: 10px;
+            border: 3px solid #f08;
+            border-radius: .8em;
+            box-shadow: 1em 1em 15px #000b;
+
+            button {
+                color: #eee;
+                font-size: 1em;
+                line-height: 1;
+                border: none;
+                background-color: transparent;
+                margin-left: 95%;
+                text-align: center;
+                font-size: 1.5em;
+                cursor: pointer;
+            }
+
+            .buscador {
+                display: flex;
+                margin-top: 1em;
+
+                input,
+                select {
+                    height: 2em;
+                }
+
+                input {
+                    flex-grow: 1;
+                }
+            }
+
+
+        }
     }
 
     .show {

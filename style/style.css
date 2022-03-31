@@ -169,101 +169,142 @@ header .header__modalContainer ul li {
   list-style: none;
 }
 
+header .header__modalContainer .buscadorBody {
+  background-color: #000;
+  height: 35em;
+  width: 35em;
+  padding: 10px;
+  border: 3px solid #f08;
+  border-radius: .8em;
+  box-shadow: 1em 1em 15px #000b;
+}
+
+header .header__modalContainer .buscadorBody button {
+  color: #eee;
+  font-size: 1em;
+  line-height: 1;
+  border: none;
+  background-color: transparent;
+  margin-left: 95%;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+header .header__modalContainer .buscadorBody .buscador {
+  display: flex;
+  margin-top: 1em;
+}
+
+header .header__modalContainer .buscadorBody .buscador input,
+header .header__modalContainer .buscadorBody .buscador select {
+  height: 2em;
+}
+
+header .header__modalContainer .buscadorBody .buscador input {
+  flex-grow: 1;
+}
+
 header .show {
   pointer-events: auto;
   opacity: 1;
 }
 
 main {
-  height: 140vh;
+  padding: 2em;
+  height: 110vh;
+  display: flex;
 }
 
-.info {
+.calendarContainer {
+  padding: 0 2em;
+  flex-grow: 1;
+}
+
+.calendarContainer .info {
   background: linear-gradient(90deg, transparent 25%, #f5b, transparent 75%);
   margin-bottom: 1em;
   display: flex;
   align-items: center;
-  padding: 0 3em;
   font-size: 1.2em;
   text-transform: uppercase;
 }
 
-.info .mesAño {
+.calendarContainer .info .mesAño {
   text-align: center;
   display: flex;
   flex-direction: column;
 }
 
-.info .mesAño h2 {
+.calendarContainer .info .mesAño h2 {
   color: #fff;
   font-size: 5em;
   text-shadow: 0 5px 5px #000;
 }
 
-.info .mesAño span {
+.calendarContainer .info .mesAño span {
   color: #eee;
   font-size: 2em;
   text-shadow: 0 0 5px #000, 0 0 5px #000;
 }
 
-.info .calendarioPrev,
-.info .calendarioNext {
+.calendarContainer .info .calendarioPrev,
+.calendarContainer .info .calendarioNext {
   color: #fee;
   text-shadow: 0 0 10px #f49, 0 0 12px #f49, 0 0 14px #f49, 0 0 15px #f49;
   cursor: pointer;
   font-size: 4em;
 }
 
-.info .calendarioPrev {
+.calendarContainer .info .calendarioPrev {
   margin-right: auto;
 }
 
-.info .calendarioNext {
+.calendarContainer .info .calendarioNext {
   margin-left: auto;
 }
 
-.calendario {
+.calendarContainer .calendario {
   background-color: #fffc;
-  margin: 4em;
   margin-top: 0;
   border: 10px solid #555;
   border-radius: 1em;
 }
 
-.calendario #dias {
+.calendarContainer .calendario #dias {
   margin: 1px 0;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 1px;
 }
 
-.calendario #dias div {
+.calendarContainer .calendario #dias div {
   border-top: 1px solid #666;
 }
 
-.calendario .calendario__dia {
-  height: 7em;
+.calendarContainer .calendario .calendario__dia {
+  height: 5em;
   padding: .2em;
   font-weight: bold;
   border: 1px solid #666;
   overflow: hidden;
 }
 
-.calendario .calendario__hoy {
+.calendarContainer .calendario .calendario__hoy {
   color: #f5b;
   text-shadow: 0 0 2px #000, 1px 1px 2px #000;
 }
 
-.calendario .calendario__diasMesPasado {
+.calendarContainer .calendario .calendario__diasMesPasado {
   color: #0007;
 }
 
-.calendario .semana {
+.calendarContainer .calendario .semana {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
 
-.calendario .semana .diaSemana {
+.calendarContainer .calendario .semana .diaSemana {
   color: #f5b;
   font-size: 1.5em;
   font-family: 'Oswald', sans-serif;
@@ -274,7 +315,22 @@ main {
   align-items: center;
 }
 
-.calendario .semana div {
+.calendarContainer .calendario .semana div {
   border: 1px solid #666;
+}
+
+.notes {
+  width: 35%;
+  padding: 0 2em;
+}
+
+.notes .panel {
+  background-color: #003;
+  height: 100%;
+  width: 100%;
+  border-radius: 1em;
+  color: #eee;
+  font-size: 2em;
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */

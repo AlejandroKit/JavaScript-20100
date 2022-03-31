@@ -34,37 +34,56 @@
                     <button id="closeList" type="button">X</button>
                 </ul>
             </div>
+            <div id="searchContainer" class="header__modalContainer">
+                <div class="buscadorBody">
+                    <button id="closeSearcher" type="button">X</button>
+                    <div class="buscador">
+                        <input type="text" />
+                        <select name="mesTitulo" id="">
+                            <option value="mes">Mes</option>
+                            <option value="titulo">Titulo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <img class="header__logo" src="images/Greiff Calender-logos.jpeg" alt="" />
             <h1 class="header__titulo">Greiff Calender</h1>
             <ul class="listaBotones">
                 <li><button id="openForm">Agendar evento</button></li>
                 <li><button id="openList">Ver eventos</button></li>
-                <li><button id="btn-3">Buscar eventos</button></li>
+                <li><button id="openSearch">Working Progress</button></li>
                 <!-- <script src="javaScript/main.js"></script> -->
             </ul>
         </header>
         <main>
-            <div class="info">
-                <div class="calendarioPrev" id="prev-month">&#9664;</div>
-                <div class="mesAño">
-                    <h2 id="mes"></h2>
-                    <span id="año"></span>
+            <div id="calendarContainer" class="calendarContainer">
+                <div class="info">
+                    <div class="calendarioPrev" id="prev-month">&#9664;</div>
+                    <div class="mesAño">
+                        <h2 id="mes"></h2>
+                        <span id="año"></span>
+                    </div>
+                    <div class="calendarioNext" id="next-month">&#9654;</div>
                 </div>
-                <div class="calendarioNext" id="next-month">&#9654;</div>
-            </div>
-            <div class="calendario">
-                <div class="semana">
-                    <div class="diaSemana"><span>Lunes</span></div>
-                    <div class="diaSemana"><span>Martes</span></div>
-                    <div class="diaSemana"><span>Miércoles</span></div>
-                    <div class="diaSemana"><span>Jueves</span></div>
-                    <div class="diaSemana"><span>Viernes</span></div>
-                    <div class="diaSemana"><span>Sábado</span></div>
-                    <div class="diaSemana"><span>Domingo</span></div>
+                <div class="calendario">
+                    <div class="semana">
+                        <div class="diaSemana"><span>Lunes</span></div>
+                        <div class="diaSemana"><span>Martes</span></div>
+                        <div class="diaSemana"><span>Miércoles</span></div>
+                        <div class="diaSemana"><span>Jueves</span></div>
+                        <div class="diaSemana"><span>Viernes</span></div>
+                        <div class="diaSemana"><span>Sábado</span></div>
+                        <div class="diaSemana"><span>Domingo</span></div>
+                    </div>
+                
+                    <div id="dias"></div>
                 </div>
-
-                <div id="dias"></div>
             </div>
+            <div id="notes" class="notes">
+                <div id="panel" class="panel">
+                    Coming Soon
+                </div>
+            </divi>
         </main>
         <script src="javaScript/main.js"></script>
     </body>

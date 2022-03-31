@@ -1,5 +1,12 @@
 let respuesta; //variable para confirmar si el usuario ingresó una variable valida
 const listaEventos = []; //array de los Eventos (objetos) con toda su información
+let eventosDeStorage;
+if (localStorage.getItem('eventos') != null) {
+    eventosDeStorage = JSON.parse(localStorage.getItem('eventos'));
+    // eventosDeStorage.forEach((eventoStorage) => {
+    // listaEventos.push(eventoStorage);  //lo que trato de hacer aca es que si en el storage hay eventos registrados que los agregue a la lista de eventos pero como lisra de eventos es const no le puedo asignar algo nuevo y cuando pusheo otros metodos de arrays con litaEventos dejan de funcionar ***PENDIENTE EN ARREGLAR***
+    // });
+}
 const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
 //referencias de tiempo para todo lo relacionado con fechas
@@ -127,7 +134,6 @@ class evento {
     //este metodo es para que se imprima los eventos agendados al HTML en la casilla de su dia correspondiente
     agregarAlCalendario() {
         let casilla = document.getElementById(`${this.dia}/${this.mes}`);
-        console.log(casilla);
         casilla.innerHTML += `<p>${this.titulo}</p>`;
     }
 }
@@ -149,6 +155,8 @@ cerrarVentana.addEventListener('click', () => {
 let btn_agendar = document.getElementById('btnAgendar');
 btn_agendar.addEventListener('click', () => {
     let nuevoEventoMes;
+    document.getElementById('mes_inp').focus();
+
     do {
         nuevoEventoMes = document.getElementById('mes_inp').value;
         if (1 <= nuevoEventoMes && nuevoEventoMes <= 12) {
@@ -175,6 +183,8 @@ btn_agendar.addEventListener('click', () => {
     const eventoNuevo = new evento(nuevoEventoTitulo, nuevoEventoMes, nuevoEventoDia, nuevoEventoDescr);
     listaEventos.push(eventoNuevo);
     eventoNuevo.agendarEvento();
+    const eventosJSON = JSON.stringify(listaEventos);
+    localStorage.setItem('eventos', eventosJSON);
     //este pequeño if es para que al agendar eventos en otro mes no vuelva a agregar al calendario eventos del mes que se esté viendo
     if (nuevoEventoMes == mesActual + 1) {
         eventoNuevo.agregarAlCalendario();
@@ -194,30 +204,28 @@ let boton_2 = document.getElementById('openList');
 boton_2.addEventListener('click', () => {
     listContainer.classList.add('show');
 
-    let fechasTitulos = document.getElementById('listaFechasTitulos');
+    let listaFechasTitulos = document.getElementById('listaFechasTitulos');
     listaEventos.forEach((evento) => {
-        fechasTitulos.innerHTML += `<li>${evento.dia}/${evento.mes}:${evento.titulo}</li>`;
+        listaFechasTitulos.innerHTML += `<li>${evento.dia}/${evento.mes}:${evento.titulo}</li>`;
     });
 
     let closeList = document.getElementById('closeList');
     closeList.addEventListener('click', () => {
         listContainer.classList.remove('show');
+        listaFechasTitulos.innerHTML = '<button id="closeList" type="button">X</button>';
     });
 });
 
-//función para imprimir una lista de los eventos agendados
-const eventos = () => {
-    listaEventos.forEach((evento) => {
-        console.log(evento);
-    });
-};
+let buscadorEventos = document.getElementById('openSearch');
+let closeSearcher = document.getElementById('closeSearcher');
+let searchContainer = document.getElementById('searchContainer');
+buscadorEventos.addEventListener('click', () => {
+    searchContainer.classList.add('show');
+});
 
-//función similar a la anterior pero solo imprime la fecha y el titulo
-const listaDeEventosFechaTitulo = () => {
-    for (let i = 0; i < listaEventos.length; i++) {
-        console.log(`${listaEventos[i].dia}/${listaEventos[i].mes}:${listaEventos[i].titulo}`);
-    }
-};
+closeSearcher.addEventListener('click', () => {
+    searchContainer.classList.remove('show');
+});
 
 //función para buscar eventos por su mes o titulo
 const buscarEvento = () => {

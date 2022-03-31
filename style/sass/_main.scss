@@ -1,106 +1,130 @@
 main {
-    height: 140vh;
-}
-
-.info {
-    background: linear-gradient(90deg, transparent 25%, #f5b, transparent 75%);
-    margin-bottom: 1em;
+    padding: 2em;
+    height: 110vh;
     display: flex;
-    align-items: center;
-    padding: 0 3em;
-    font-size: 1.2em;
-    text-transform: uppercase;
+}
 
-    .mesAño {
-        text-align: center;
+.calendarContainer {
+    padding: 0 2em;
+    flex-grow: 1;
+
+    .info {
+        background: linear-gradient(90deg, transparent 25%, #f5b, transparent 75%);
+        margin-bottom: 1em;
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        // padding: 0 3em;
+        font-size: 1.2em;
+        text-transform: uppercase;
 
-        h2 {
-            color: #fff;
-            font-size: 5em;
-            text-shadow: 0 5px 5px #000;
+        .mesAño {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+
+            h2 {
+                color: #fff;
+                font-size: 5em;
+                text-shadow: 0 5px 5px #000;
+            }
+
+            span {
+                color: #eee;
+                font-size: 2em;
+                text-shadow: 0 0 5px #000, 0 0 5px #000;
+            }
         }
 
-        span {
-            color: #eee;
-            font-size: 2em;
-            text-shadow: 0 0 5px #000, 0 0 5px #000;
+
+
+        .calendarioPrev,
+        .calendarioNext {
+            color: #fee;
+            text-shadow: 0 0 10px #f49, 0 0 12px #f49, 0 0 14px #f49, 0 0 15px #f49;
+            cursor: pointer;
+            font-size: 4em;
+        }
+
+        .calendarioPrev {
+            margin-right: auto;
+        }
+
+        .calendarioNext {
+            margin-left: auto;
         }
     }
 
+    .calendario {
+        background-color: #fffc;
+        // margin: 4em;
+        margin-top: 0;
+        border: 10px solid #555;
+        border-radius: 1em;
 
 
-    .calendarioPrev,
-    .calendarioNext {
-        color: #fee;
-        text-shadow: 0 0 10px #f49, 0 0 12px #f49, 0 0 14px #f49, 0 0 15px #f49;
-        cursor: pointer;
-        font-size: 4em;
-    }
+        #dias {
+            margin: 1px 0;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 1px;
 
-    .calendarioPrev {
-        margin-right: auto;
-    }
+            div {
+                border-top: 1px solid #666;
+            }
+        }
 
-    .calendarioNext {
-        margin-left: auto;
+        .calendario__dia {
+            height: 5em;
+            padding: .2em;
+            font-weight: bold;
+            border: 1px solid #666;
+            overflow: hidden;
+        }
+
+        .calendario__hoy {
+            color: #f5b;
+            text-shadow: 0 0 2px #000, 1px 1px 2px #000;
+        }
+
+        .calendario__diasMesPasado {
+            color: #0007;
+        }
+
+        .semana {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+
+            .diaSemana {
+                color: #f5b;
+                font-size: 1.5em;
+                font-family: 'Oswald', sans-serif;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px #000, 2px 2px 2px #000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            div {
+                border: 1px solid #666;
+            }
+        }
     }
 }
 
-.calendario {
-    background-color: #fffc;
-    margin: 4em;
-    margin-top: 0;
-    border: 10px solid #555;
-    border-radius: 1em;
+.notes {
+    // background-color: #5559;
+    width: 35%;
+    padding: 0 2em;
+    // flex-grow: .8;
 
-
-    #dias {
-        margin: 1px 0;
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-gap: 1px;
-
-        div {
-            border-top: 1px solid #666;
-        }
-    }
-
-    .calendario__dia {
-        height: 7em;
-        padding: .2em;
-        font-weight: bold;
-        border: 1px solid #666;
-        overflow: hidden;
-    }
-
-    .calendario__hoy {
-        color: #f5b;
-        text-shadow: 0 0 2px #000, 1px 1px 2px #000;
-    }
-
-    .calendario__diasMesPasado {
-        color: #0007;
-    }
-
-    .semana {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-
-        .diaSemana {
-            color: #f5b;
-            font-size: 1.5em;
-            font-family: 'Oswald', sans-serif;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px #000, 2px 2px 2px #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        div {
-            border: 1px solid #666;
-        }
+    .panel {
+        background-color: #003;
+        height: 100%;
+        width: 100%;
+        border-radius: 1em;
+        color: #eee;
+        font-size: 2em;
+        text-align: center;
     }
 }
