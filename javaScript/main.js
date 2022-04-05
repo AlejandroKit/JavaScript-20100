@@ -150,6 +150,16 @@ cerrarVentana.addEventListener('click', () => {
     formContainer.classList.remove('show');
 });
 
+const ordenarDias = (a, b) => {
+    if (a.dia < b.dia) {
+        return -1;
+    } else if (a.dia > b.dia) {
+        return 1;
+    } else {
+        return 0;
+    }
+};
+
 const ordenar = (a, b) => {
     if (a.mes < b.mes) {
         return -1;
@@ -193,6 +203,7 @@ btn_agendar.addEventListener('click', () => {
     //agendo el evento nuevo en la lista con toda la info del form
     const eventoNuevo = new evento(nuevoEventoTitulo, nuevoEventoMes, nuevoEventoDia, nuevoEventoDescr);
     listaEventos.push(eventoNuevo);
+    listaEventos.sort(ordenarDias);
     listaEventos.sort(ordenar);
 
     //guardo la lista de eventos en el local storage
@@ -233,6 +244,18 @@ let closeSearch = document.getElementById('closeSearch');
 let searchContainer = document.getElementById('searchContainer');
 buscadorEventos.addEventListener('click', () => {
     searchContainer.classList.add('show');
+
+    let select = document.getElementById('mesTitulo');
+    let input = document.getElementById('searcher');
+    select.addEventListener('change', (categ) => {
+        let opcion = categ.target.value;
+        console.log(opcion);
+        if (opcion == 'mes') {
+            input.placeholder = 'Escriba el mes del evento';
+        } else if (opcion == 'titulo') {
+            input.placeholder = 'Escriba el titulo del evento';
+        }
+    });
 });
 
 closeSearch.addEventListener('click', () => {
