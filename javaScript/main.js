@@ -1,12 +1,12 @@
 let respuesta; //variable para confirmar si el usuario ingresó una variable valida
 const listaEventos = []; //array de los Eventos (objetos) con toda su información
-let eventosDeStorage;
-if (localStorage.getItem('eventos') != null) {
-    eventosDeStorage = JSON.parse(localStorage.getItem('eventos'));
-    // eventosDeStorage.forEach((eventoStorage) => {
-    // listaEventos.push(eventoStorage);  //lo que trato de hacer aca es que si en el storage hay eventos registrados que los agregue a la lista de eventos pero como lisra de eventos es const no le puedo asignar algo nuevo y cuando pusheo otros metodos de arrays con litaEventos dejan de funcionar ***PENDIENTE EN ARREGLAR***
-    // });
-}
+// let eventosDeStorage;
+// if (localStorage.getItem('eventos') != null) {
+// eventosDeStorage = JSON.parse(localStorage.getItem('eventos'));
+// eventosDeStorage.forEach((eventoStorage) => {
+// listaEventos.push(eventoStorage);  //lo que trato de hacer aca es que si en el storage hay eventos registrados que los agregue a la lista de eventos pero como lisra de eventos es const no le puedo asignar algo nuevo y cuando pusheo otros metodos de arrays con litaEventos dejan de funcionar ***PENDIENTE EN ARREGLAR***
+// });
+// }
 const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
 //referencias de tiempo para todo lo relacionado con fechas
@@ -37,7 +37,7 @@ año.textContent = añoActual.toString();
 //función para saber en que día de la semana empieza el mes a elección
 const comienzoDeMes = () => {
     let primerDia = new Date(añoActual, mesActual, 1);
-    return primerDia.getDay() - 1 === -1 ? 6 : primerDia.getDay() - 1; //esta cuenta es porque para la funcion getDay el primer dia de la semana es domingo y para este proyecto la semana empieza el lunes ;) (NOTA: se puede dejar simplemente el "return primerDia.getDay()" pero habría que reordenar los dias de la semana en el html)
+    return primerDia.getDay();
 };
 
 //función para saber si el año es bisiesto o no
@@ -65,6 +65,7 @@ const escribirMes = (mes) => {
         </div>`;
     }
 
+    //este ciclo es para escribir los dias del mes que aparesca en pantalla, marcando el día actual para diferenciarlo
     for (let i = 1; i <= cuantosDias(mes); i++) {
         if ((i === diaActual) & (mes === mesActualAux) & (añoActual === añoActualAux)) {
             dias.innerHTML += `<div class="calendario__dia calendario__item calendario__hoy">
@@ -78,11 +79,10 @@ const escribirMes = (mes) => {
             </div>`;
         }
     }
+
     // llamo a agregar al DOM todos los eventos del mes para que se impriman cada que aparece el mes
     listaEventos.forEach((evento) => {
-        if (evento.mes == mes + 1) {
-            evento.agregarAlCalendario();
-        }
+        evento.mes == mes + 1 && evento.agregarAlCalendario();
     });
 };
 escribirMes(mesActual);
@@ -128,9 +128,7 @@ class evento {
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
-    agendarEvento() {
-        console.log(`se ha agendado el evento "${this.titulo}" el día ${this.dia}/${this.mes}`);
-    }
+
     //este metodo es para que se imprima los eventos agendados al HTML en la casilla de su dia correspondiente
     agregarAlCalendario() {
         let casilla = document.getElementById(`${this.dia}/${this.mes}`);
@@ -144,6 +142,7 @@ let boton_1 = document.getElementById('openForm'); //boton de open para que emer
 boton_1.addEventListener('click', () => {
     //en esta funcion agrego la clase "show" al container para que le agregue opacity:1 y que se vea (visitar _header.scss para verlo)
     formContainer.classList.add('show');
+    document.getElementById('mes_inp').focus();
 });
 
 let cerrarVentana = document.getElementById('closeForm'); //selecciono la "X" del formulario para poder quitarle la clase "show" al container y que se vuelva invicible de nuevo
@@ -151,19 +150,27 @@ cerrarVentana.addEventListener('click', () => {
     formContainer.classList.remove('show');
 });
 
+const ordenar = (a, b) => {
+    if (a.mes < b.mes) {
+        return -1;
+    } else if (a.mes > b.mes) {
+        return 1;
+    } else {
+        return 0;
+    }
+};
+
 //función para crear y agendar eventos
 let btn_agendar = document.getElementById('btnAgendar');
 btn_agendar.addEventListener('click', () => {
     let nuevoEventoMes;
-    document.getElementById('mes_inp').focus();
 
     do {
         nuevoEventoMes = document.getElementById('mes_inp').value;
         if (1 <= nuevoEventoMes && nuevoEventoMes <= 12) {
             respuesta = true;
         } else {
-            nuevoEventoMes.innerHTML += 'No hay tantos meses';
-            document.getElementById('mes_inp').value = '';
+            document.getElementById('mes_inp').value = '1';
             respuesta = false;
         }
     } while (respuesta == false);
@@ -174,21 +181,26 @@ btn_agendar.addEventListener('click', () => {
         if (0 < nuevoEventoDia && nuevoEventoDia <= cantDiasDelMes) {
             respuesta = true;
         } else {
-            alert('Maestro, no hay tantos dias en ese mes');
+            // alert('Maestro, no hay tantos dias en ese mes');
             respuesta = false;
         }
     } while (respuesta == false);
+
+    //tomo los valores de los inputs de titulo y desc
     let nuevoEventoTitulo = document.getElementById('titulo_inp').value;
     let nuevoEventoDescr = document.getElementById('desc_inp').value;
+
+    //agendo el evento nuevo en la lista con toda la info del form
     const eventoNuevo = new evento(nuevoEventoTitulo, nuevoEventoMes, nuevoEventoDia, nuevoEventoDescr);
     listaEventos.push(eventoNuevo);
-    eventoNuevo.agendarEvento();
+    listaEventos.sort(ordenar);
+
+    //guardo la lista de eventos en el local storage
     const eventosJSON = JSON.stringify(listaEventos);
     localStorage.setItem('eventos', eventosJSON);
+
     //este pequeño if es para que al agendar eventos en otro mes no vuelva a agregar al calendario eventos del mes que se esté viendo
-    if (nuevoEventoMes == mesActual + 1) {
-        eventoNuevo.agregarAlCalendario();
-    }
+    nuevoEventoMes == mesActual + 1 && eventoNuevo.agregarAlCalendario();
 
     //limpio los inputs para que al agendar y volver a abrir el formulario esten todos los inputs vacios
     document.getElementById('mes_inp').value = '';
@@ -217,13 +229,13 @@ boton_2.addEventListener('click', () => {
 });
 
 let buscadorEventos = document.getElementById('openSearch');
-let closeSearcher = document.getElementById('closeSearcher');
+let closeSearch = document.getElementById('closeSearch');
 let searchContainer = document.getElementById('searchContainer');
 buscadorEventos.addEventListener('click', () => {
     searchContainer.classList.add('show');
 });
 
-closeSearcher.addEventListener('click', () => {
+closeSearch.addEventListener('click', () => {
     searchContainer.classList.remove('show');
 });
 
