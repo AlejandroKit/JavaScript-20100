@@ -1,12 +1,14 @@
 let respuesta; //variable para confirmar si el usuario ingresó una variable valida
+// validarStorage = () => {
+//     if (localStorage.getItem('eventos') != null) {
+//         eventosDeStorage = JSON.parse(localStorage.getItem('eventos'));
+//         return eventosDeStorage;
+//     } else {
+//         return [];
+//     }
+// };
 const listaEventos = []; //array de los Eventos (objetos) con toda su información
-// let eventosDeStorage;
-// if (localStorage.getItem('eventos') != null) {
-// eventosDeStorage = JSON.parse(localStorage.getItem('eventos'));
-// eventosDeStorage.forEach((eventoStorage) => {
-// listaEventos.push(eventoStorage);  //lo que trato de hacer aca es que si en el storage hay eventos registrados que los agregue a la lista de eventos pero como lisra de eventos es const no le puedo asignar algo nuevo y cuando pusheo otros metodos de arrays con litaEventos dejan de funcionar ***PENDIENTE EN ARREGLAR***
-// });
-// }
+console.log(listaEventos);
 const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
 //referencias de tiempo para todo lo relacionado con fechas
@@ -138,8 +140,8 @@ class evento {
 
 //Aqui selecciono el modal que quiero usar como formulario emergente para agendar el evento y el boton que lo va a "llamar a hacer pop-up" y aparecer
 let formContainer = document.getElementById('formContainer'); //container del formulario emergente
-let boton_1 = document.getElementById('openForm'); //boton de open para que emerga el formulario
-boton_1.addEventListener('click', () => {
+let btn_form = document.getElementById('openForm'); //boton de open para que emerga el formulario
+btn_form.addEventListener('click', () => {
     //en esta funcion agrego la clase "show" al container para que le agregue opacity:1 y que se vea (visitar _header.scss para verlo)
     formContainer.classList.add('show');
     document.getElementById('mes_inp').focus();
@@ -220,11 +222,20 @@ btn_agendar.addEventListener('click', () => {
     document.getElementById('desc_inp').value = '';
     //esto es para que al agendar evento tambien desaparezca el formulario
     formContainer.classList.remove('show');
+
+    Toastify({
+        text: `Evento ${nuevoEventoTitulo} agendado`,
+        gravity: 'top',
+        position: 'right',
+        style: {
+            background: 'linear-gradient(45deg, #f1f, #a15)',
+        },
+    }).showToast();
 });
 
 let listContainer = document.getElementById('eventListContainer');
-let boton_2 = document.getElementById('openList');
-boton_2.addEventListener('click', () => {
+let btn_list = document.getElementById('openList');
+btn_list.addEventListener('click', () => {
     listContainer.classList.add('show');
 
     let listaFechasTitulos = document.getElementById('listaFechasTitulos');
@@ -238,41 +249,3 @@ boton_2.addEventListener('click', () => {
         listaFechasTitulos.innerHTML = '<button id="closeList" type="button">X</button>';
     });
 });
-
-let buscadorEventos = document.getElementById('openSearch');
-let closeSearch = document.getElementById('closeSearch');
-let searchContainer = document.getElementById('searchContainer');
-buscadorEventos.addEventListener('click', () => {
-    searchContainer.classList.add('show');
-
-    let select = document.getElementById('mesTitulo');
-    let input = document.getElementById('searcher');
-    select.addEventListener('change', (categ) => {
-        let opcion = categ.target.value;
-        console.log(opcion);
-        if (opcion == 'mes') {
-            input.placeholder = 'Escriba el mes del evento';
-        } else if (opcion == 'titulo') {
-            input.placeholder = 'Escriba el titulo del evento';
-        }
-    });
-});
-
-closeSearch.addEventListener('click', () => {
-    searchContainer.classList.remove('show');
-});
-
-//función para buscar eventos por su mes o titulo
-const buscarEvento = () => {
-    let modoDeBusqueda = prompt('Como quieres buscar?? por mes o por titulo (escriba "mes" o "titulo")');
-
-    if ((modoDeBusqueda === 'mes') | (modoDeBusqueda === 'Mes')) {
-        let busqueda = parseInt(prompt('ingrese el mes cuyo eventos quiere ver'));
-        let resultado = listaEventos.filter((elem) => elem.mes == busqueda);
-        console.log(resultado);
-    } else if ((modoDeBusqueda === 'titulo') | (modoDeBusqueda === 'Titulo')) {
-        busqueda = prompt('ingrese el titulo cuyo eventos quiere ver');
-        resultado = listaEventos.filter((elem) => elem.titulo == busqueda);
-        console.log(resultado);
-    }
-};
