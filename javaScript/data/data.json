@@ -1,6 +1,6 @@
 [
-    { "mes": "5", "dia": "1", "titulo": "Entrega Proyecto Final", "descripcion": "Fecha limite para entegar el proyecto final del curso de JavaScript" },
     { "mes": "4", "dia": "11", "titulo": "Clase final: js", "descripcion": "Ultima clase del curso de JavaScript" },
-    { "mes": "12", "dia": "25", "titulo": "Navidad", "descripcion": "" },
-    { "mes": "11", "dia": "18", "titulo": "Cumpleaños de Alejandro", "descripcion": "Cumpleaños numero 22 del creador del sitio" }
+    { "mes": "5", "dia": "1", "titulo": "Entrega Proyecto Final", "descripcion": "Fecha limite para entegar el proyecto final del curso de JavaScript" },
+    { "mes": "11", "dia": "18", "titulo": "Cumpleaños de Alejandro", "descripcion": "Cumpleaños numero 22 del creador del sitio" },
+    { "mes": "12", "dia": "25", "titulo": "Navidad", "descripcion": "" }
 ]

@@ -217,8 +217,8 @@ main {
 }
 
 .calendarContainer {
-  padding: 0 2em;
-  flex-grow: 1;
+  padding: 0 1em;
+  width: 70%;
 }
 
 .calendarContainer .info {
@@ -254,6 +254,11 @@ main {
   text-shadow: 0 0 10px #f49, 0 0 12px #f49, 0 0 14px #f49, 0 0 15px #f49;
   cursor: pointer;
   font-size: 4em;
+}
+
+.calendarContainer .info .calendarioPrev::selection,
+.calendarContainer .info .calendarioNext::selection {
+  background-color: transparent;
 }
 
 .calendarContainer .info .calendarioPrev {
@@ -321,7 +326,7 @@ main {
 
 .notes {
   width: 35%;
-  padding: 0 2em;
+  padding: 0 1em;
 }
 
 .notes .panel {

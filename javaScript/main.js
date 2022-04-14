@@ -1,5 +1,4 @@
 let respuesta; //variable para confirmar si el usuario ingresó una variable valida
-
 validarStorage = () => {
     if (localStorage.getItem('eventos') != null) {
         eventosDeStorage = JSON.parse(localStorage.getItem('eventos'));
@@ -9,9 +8,10 @@ validarStorage = () => {
     }
 };
 let listaEventos = validarStorage(); //array de los Eventos (objetos) con toda su información
-fetch('/data/data.json')
-    .then((res) => res.json)
+fetch('./javaScript/data/data.json')
+    .then((res) => res.json())
     .then((data) => {
+        console.log(data);
         data.forEach((evento) => {
             listaEventos.push(evento);
         });

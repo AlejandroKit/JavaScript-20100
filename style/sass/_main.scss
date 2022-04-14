@@ -5,8 +5,8 @@ main {
 }
 
 .calendarContainer {
-    padding: 0 2em;
-    flex-grow: 1;
+    padding: 0 1em;
+    width: 70%;
 
     .info {
         background: linear-gradient(90deg, transparent 25%, #f5b, transparent 75%);
@@ -43,6 +43,10 @@ main {
             text-shadow: 0 0 10px #f49, 0 0 12px #f49, 0 0 14px #f49, 0 0 15px #f49;
             cursor: pointer;
             font-size: 4em;
+
+            &::selection {
+                background-color: transparent;
+            }
         }
 
         .calendarioPrev {
@@ -115,7 +119,7 @@ main {
 .notes {
     // background-color: #5559;
     width: 35%;
-    padding: 0 2em;
+    padding: 0 1em;
     // flex-grow: .8;
 
     .panel {
