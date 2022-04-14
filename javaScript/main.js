@@ -1,14 +1,21 @@
 let respuesta; //variable para confirmar si el usuario ingresó una variable valida
-// validarStorage = () => {
-//     if (localStorage.getItem('eventos') != null) {
-//         eventosDeStorage = JSON.parse(localStorage.getItem('eventos'));
-//         return eventosDeStorage;
-//     } else {
-//         return [];
-//     }
-// };
-const listaEventos = []; //array de los Eventos (objetos) con toda su información
-console.log(listaEventos);
+
+validarStorage = () => {
+    if (localStorage.getItem('eventos') != null) {
+        eventosDeStorage = JSON.parse(localStorage.getItem('eventos'));
+        return eventosDeStorage;
+    } else {
+        return [];
+    }
+};
+let listaEventos = validarStorage(); //array de los Eventos (objetos) con toda su información
+fetch('/data/data.json')
+    .then((res) => res.json)
+    .then((data) => {
+        data.forEach((evento) => {
+            listaEventos.push(evento);
+        });
+    });
 const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
 //referencias de tiempo para todo lo relacionado con fechas
@@ -58,6 +65,11 @@ const cuantosDias = (mes) => {
     }
 };
 
+const agregarAlCalendario = (evento) => {
+    let casilla = document.getElementById(`${evento.dia}/${evento.mes}`);
+    casilla.innerHTML += `<p>${evento.titulo}</p>`;
+};
+
 //función para imprimir los dias del mes correspondiente empezando por el día de la semana en la que empieza el mes elegido
 const escribirMes = (mes) => {
     //el primer ciclo es para imprimir los ultimos dias del mes pasado
@@ -70,21 +82,21 @@ const escribirMes = (mes) => {
     //este ciclo es para escribir los dias del mes que aparesca en pantalla, marcando el día actual para diferenciarlo
     for (let i = 1; i <= cuantosDias(mes); i++) {
         if ((i === diaActual) & (mes === mesActualAux) & (añoActual === añoActualAux)) {
-            dias.innerHTML += `<div class="calendario__dia calendario__item calendario__hoy">
+            dias.innerHTML += `<div id="${i}/${mes + 1}" class="calendario__dia calendario__item calendario__hoy">
             ${i}
-            <div class="dia__eventos" id="${i}/${mes + 1}"></div>
+            <div class="dia__eventos" id="${i}/${mes + 1}_eventos"></div>
             </div>`;
         } else {
-            dias.innerHTML += `<div class="calendario__dia calendario__item">
+            dias.innerHTML += `<div id="${i}/${mes + 1}" class="calendario__dia calendario__item">
             ${i}
-            <div class="dia__eventos" id="${i}/${mes + 1}"></div>
+            <div class="dia__eventos" id="${i}/${mes + 1}_eventos"></div>
             </div>`;
         }
     }
 
     // llamo a agregar al DOM todos los eventos del mes para que se impriman cada que aparece el mes
     listaEventos.forEach((evento) => {
-        evento.mes == mes + 1 && evento.agregarAlCalendario();
+        evento.mes == mes + 1 && agregarAlCalendario(evento);
     });
 };
 escribirMes(mesActual);
@@ -129,12 +141,6 @@ class evento {
         this.dia = dia;
         this.titulo = titulo;
         this.descripcion = descripcion;
-    }
-
-    //este metodo es para que se imprima los eventos agendados al HTML en la casilla de su dia correspondiente
-    agregarAlCalendario() {
-        let casilla = document.getElementById(`${this.dia}/${this.mes}`);
-        casilla.innerHTML += `<p>${this.titulo}</p>`;
     }
 }
 
@@ -213,7 +219,7 @@ btn_agendar.addEventListener('click', () => {
     localStorage.setItem('eventos', eventosJSON);
 
     //este pequeño if es para que al agendar eventos en otro mes no vuelva a agregar al calendario eventos del mes que se esté viendo
-    nuevoEventoMes == mesActual + 1 && eventoNuevo.agregarAlCalendario();
+    nuevoEventoMes == mesActual + 1 && agregarAlCalendario(eventoNuevo);
 
     //limpio los inputs para que al agendar y volver a abrir el formulario esten todos los inputs vacios
     document.getElementById('mes_inp').value = '';
