@@ -1,4 +1,6 @@
 let respuesta; //variable para confirmar si el usuario ingresó una variable valida
+
+// funcion que retorna un array de eventos en el session storage
 validarStorage = () => {
     if (localStorage.getItem('eventos') != null) {
         eventosDeStorage = JSON.parse(localStorage.getItem('eventos'));
@@ -7,15 +9,19 @@ validarStorage = () => {
         return [];
     }
 };
-let listaEventos = validarStorage(); //array de los Eventos (objetos) con toda su información
+let listaEventos = validarStorage(); //array de los Eventos (objetos) con toda su información, si hay algo en el storage es lo primero que se guarda
+// guarda en el array de eventos los datos del data.json, no los guarda antes de que se escriba el mes asi que para ver el evento de abril tienes que cambiar de mes y volver
+
+// creo una lista con los eventos traidos del data.json porque si los pongo en el array anterior se duplican en el storage y terminan duplicandose estos eventos cada vez que el usuario agrega uno
+const listaEventosPred=[]
 fetch('./javaScript/data/data.json')
-    .then((res) => res.json())
-    .then((data) => {
-        console.log(data);
-        data.forEach((evento) => {
-            listaEventos.push(evento);
-        });
+.then((res) => res.json())
+.then((data) => {
+    data.forEach((evento) => {
+        listaEventosPred.push(evento);
     });
+});
+
 const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
 //referencias de tiempo para todo lo relacionado con fechas
@@ -30,7 +36,7 @@ let añoActualAux = fechaReferencia.getFullYear(); //solo sirve para que no se m
 let prevMesActualButton = document.getElementById('prev-month');
 let nextMesActualButton = document.getElementById('next-month');
 
-//asignando los eventos a los botones flecha para poder cambiar de mes (adelanto del desafio: incorporar eventos)
+//asignando los eventos a los botones flecha para poder cambiar de mes
 prevMesActualButton.addEventListener('click', () => ultimoMes());
 nextMesActualButton.addEventListener('click', () => siguienteMes());
 
@@ -65,6 +71,7 @@ const cuantosDias = (mes) => {
     }
 };
 
+// funcion para pintar un evento en el calendario
 const agregarAlCalendario = (evento) => {
     let casilla = document.getElementById(`${evento.dia}/${evento.mes}`);
     casilla.innerHTML += `<p>${evento.titulo}</p>`;
@@ -81,7 +88,7 @@ const escribirMes = (mes) => {
 
     //este ciclo es para escribir los dias del mes que aparesca en pantalla, marcando el día actual para diferenciarlo
     for (let i = 1; i <= cuantosDias(mes); i++) {
-        if ((i === diaActual) & (mes === mesActualAux) & (añoActual === añoActualAux)) {
+        if (i === diaActual && mes === mesActualAux && añoActual === añoActualAux) {
             dias.innerHTML += `<div id="${i}/${mes + 1}" class="calendario__dia calendario__item calendario__hoy">
             ${i}
             <div class="dia__eventos" id="${i}/${mes + 1}_eventos"></div>
@@ -96,10 +103,36 @@ const escribirMes = (mes) => {
 
     // llamo a agregar al DOM todos los eventos del mes para que se impriman cada que aparece el mes
     listaEventos.forEach((evento) => {
+        (evento.mes == mes + 1 & evento.año==añoActual) && agregarAlCalendario(evento);
+    });
+
+    // llamo a agregar al DOM todos los eventos (del data.json) del mes para que se impriman cada que aparece el mes
+    listaEventosPred.forEach((evento) => {
         evento.mes == mes + 1 && agregarAlCalendario(evento);
     });
+
+    // agregar un evento a cada casilla para que cuando sea clickeada tome la informacion de todos los eventos de ese día y las imprima en el panel de la derecha
+    let panel = document.getElementById('panel');
+    for (let i = 1; i <= cuantosDias(mesActual); i++) {
+        let casillas = document.getElementById(`${i}/${mesActual + 1}`);
+        casillas.addEventListener('click', () => {
+            panel.innerHTML = '';
+            // guardo los eventos del usuario y los de data.json en dos arrays para concatenarlos y de ese tercer array hacer toda la operacion de impirimir en el panel
+            let eventosUsuario = listaEventos.filter((evento) => evento.dia == i && evento.mes == mesActual + 1 &&evento.año==añoActual);
+            let eventosPred = listaEventosPred.filter((evento) => evento.dia == i && evento.mes == mesActual + 1 );
+
+            let datosDelEvento=eventosUsuario.concat(eventosPred)
+            // console.log(datosDelEvento);
+            datosDelEvento.forEach((evento) => {
+                panel.innerHTML += `<div class="eventoDetalle">   
+                <h4>${evento.titulo}</h4>
+                <p>${evento.descripcion}</p>
+                </div>`;
+            });
+        });
+    }
 };
-escribirMes(mesActual);
+escribirMes(mesActual); //primera escritura al abrir el sitio
 
 //actualizar los valores de mes y año para cambiarlos en el DOM
 const setearNuevaFecha = () => {
@@ -136,9 +169,10 @@ const siguienteMes = () => {
 
 //clase para eventos con sus atributos y metodos
 class evento {
-    constructor(titulo, mes, dia, descripcion) {
+    constructor(titulo, mes, dia, año, descripcion) {
         this.mes = mes;
         this.dia = dia;
+        this.año=año
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
@@ -151,13 +185,14 @@ btn_form.addEventListener('click', () => {
     //en esta funcion agrego la clase "show" al container para que le agregue opacity:1 y que se vea (visitar _header.scss para verlo)
     formContainer.classList.add('show');
     document.getElementById('mes_inp').focus();
+
+    let cerrarVentana = document.getElementById('closeForm'); //selecciono la "X" del formulario para poder quitarle la clase "show" al container y que se vuelva invicible de nuevo
+    cerrarVentana.addEventListener('click', () => {
+        formContainer.classList.remove('show');
+    });
 });
 
-let cerrarVentana = document.getElementById('closeForm'); //selecciono la "X" del formulario para poder quitarle la clase "show" al container y que se vuelva invicible de nuevo
-cerrarVentana.addEventListener('click', () => {
-    formContainer.classList.remove('show');
-});
-
+// funciones para ordenar los eventos (antes había una lista en donde se podía ver los eventos ordenados en orden cronologico pero esa funcion se eliminó), ahora solo sirve por mero amor al orden
 const ordenarDias = (a, b) => {
     if (a.dia < b.dia) {
         return -1;
@@ -167,8 +202,7 @@ const ordenarDias = (a, b) => {
         return 0;
     }
 };
-
-const ordenar = (a, b) => {
+const ordenarMes = (a, b) => {
     if (a.mes < b.mes) {
         return -1;
     } else if (a.mes > b.mes) {
@@ -207,12 +241,13 @@ btn_agendar.addEventListener('click', () => {
     //tomo los valores de los inputs de titulo y desc
     let nuevoEventoTitulo = document.getElementById('titulo_inp').value;
     let nuevoEventoDescr = document.getElementById('desc_inp').value;
+    let nuevoEventoAño=añoActual
 
     //agendo el evento nuevo en la lista con toda la info del form
-    const eventoNuevo = new evento(nuevoEventoTitulo, nuevoEventoMes, nuevoEventoDia, nuevoEventoDescr);
+    const eventoNuevo = new evento(nuevoEventoTitulo, nuevoEventoMes, nuevoEventoDia,nuevoEventoAño, nuevoEventoDescr);
     listaEventos.push(eventoNuevo);
     listaEventos.sort(ordenarDias);
-    listaEventos.sort(ordenar);
+    listaEventos.sort(ordenarMes);
 
     //guardo la lista de eventos en el local storage
     const eventosJSON = JSON.stringify(listaEventos);
@@ -239,19 +274,3 @@ btn_agendar.addEventListener('click', () => {
     }).showToast();
 });
 
-let listContainer = document.getElementById('eventListContainer');
-let btn_list = document.getElementById('openList');
-btn_list.addEventListener('click', () => {
-    listContainer.classList.add('show');
-
-    let listaFechasTitulos = document.getElementById('listaFechasTitulos');
-    listaEventos.forEach((evento) => {
-        listaFechasTitulos.innerHTML += `<li>${evento.dia}/${evento.mes}:${evento.titulo}</li>`;
-    });
-
-    let closeList = document.getElementById('closeList');
-    closeList.addEventListener('click', () => {
-        listContainer.classList.remove('show');
-        listaFechasTitulos.innerHTML = '<button id="closeList" type="button">X</button>';
-    });
-});

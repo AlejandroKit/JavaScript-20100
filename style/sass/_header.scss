@@ -33,26 +33,22 @@ header {
         // grid-column: 2/3;
     }
 
-    .listaBotones {
-        // grid-column: 2/3;
-        // display: flex;
-        justify-content: space-around;
-        list-style: none;
 
-        button {
-            background-color: #f7b;
-            color: #f08;
-            width: 100%;
-            margin: .2em;
-            padding: .8em;
-            border-radius: .5em;
-            border: none;
 
-            &:hover {
-                cursor: pointer;
-            }
+    button {
+        background-color: #f7b;
+        color: #f08;
+        margin: .2em;
+        padding: .8em;
+        border-radius: .5em;
+        border: none;
+        align-self: flex-end;
+
+        &:hover {
+            cursor: pointer;
         }
     }
+
 
     .header__modalContainer {
         background-color: #000c;
@@ -127,79 +123,11 @@ header {
             }
 
             button {
+                width: 100%;
                 border: 5px #777;
                 border-style: outset;
                 margin-top: 1em;
             }
-        }
-
-        ul {
-            background-color: #000;
-            height: 35em;
-            width: 35em;
-            padding: 10px;
-            border: 3px solid #f08;
-            border-radius: .8em;
-            box-shadow: 1em 1em 15px #000b;
-            display: flex;
-            flex-direction: column;
-
-            button {
-                color: #eee;
-                font-size: 1em;
-                line-height: 1;
-                border: none;
-                background-color: transparent;
-                text-align: end;
-                font-size: 1.5em;
-                cursor: pointer;
-            }
-
-            li {
-                color: #eee;
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                font-size: 1.5em;
-                margin-top: .5em;
-                list-style: none;
-            }
-        }
-
-        .buscadorBody {
-            background-color: #000;
-            height: 35em;
-            width: 35em;
-            padding: 10px;
-            border: 3px solid #f08;
-            border-radius: .8em;
-            box-shadow: 1em 1em 15px #000b;
-
-            button {
-                color: #eee;
-                font-size: 1em;
-                line-height: 1;
-                border: none;
-                background-color: transparent;
-                margin-left: 95%;
-                text-align: center;
-                font-size: 1.5em;
-                cursor: pointer;
-            }
-
-            .buscador {
-                display: flex;
-                margin-top: 1em;
-
-                input,
-                select {
-                    height: 2em;
-                }
-
-                input {
-                    flex-grow: 1;
-                }
-            }
-
-
         }
     }
 

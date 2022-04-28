@@ -31,29 +31,10 @@
                     <button id="btnAgendar" type="button">Enviar</button>
                 </form>
             </div>
-            <div id="eventListContainer" class="header__modalContainer">
-                <ul id="listaFechasTitulos">
-                    <button id="closeList" type="button">X</button>
-                </ul>
-            </div>
-            <div id="searchContainer" class="header__modalContainer">
-                <div class="buscadorBody">
-                    <button id="closeSearch" type="button">X</button>
-                    <div class="buscador">
-                        <input id="searcher" type="text" placeholder="Escriba el mes del evento" autocomplete="off" />
-                        <select name="mesTitulo" id="mesTitulo">
-                            <option value="mes">Mes</option>
-                            <option value="titulo">Titulo</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            
             <img class="header__logo" src="images/Greiff Calender-logos.jpeg" alt="" />
             <h1 class="header__titulo">Greiff Calendar</h1>
-            <ul class="listaBotones">
-                <li><button id="openForm">Agendar evento</button></li>
-                <li><button id="openList">Ver eventos</button></li>
-            </ul>
+            <button id="openForm">Agendar evento</button>  
         </header>
         <main>
             <div id="calendarContainer" class="calendarContainer">
@@ -79,9 +60,8 @@
                     <div id="dias"></div>
                 </div>
             </div>
-            <div id="notes" class="notes">
+            <div id="panelContainer" class="panelContainer">
                 <div id="panel" class="panel">
-                    Coming Soon
                 </div>
             </divi>
         </main>
