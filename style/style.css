@@ -99,7 +99,7 @@ header .header__modalContainer form span {
 }
 
 header .header__modalContainer form .form__span-margin {
-  margin: .5em 0 .1em 0;
+  margin: 1.5em 0 .1em 0;
 }
 
 header .header__modalContainer form input,
@@ -125,6 +125,58 @@ header .header__modalContainer form textarea {
   resize: none;
   font-size: 1.5em;
   font-weight: lighter;
+}
+
+header .header__modalContainer form .inputContainer {
+  position: relative;
+}
+
+header .header__modalContainer form .inputContainer input {
+  display: block;
+  width: 100%;
+}
+
+header .header__modalContainer form .inputContainer .fa-solid {
+  font-size: 1.5em;
+  position: absolute;
+  top: 7px;
+  right: 0;
+}
+
+header .header__modalContainer form .inputContainer .fa-circle-check {
+  color: #0c0;
+  visibility: hidden;
+}
+
+header .header__modalContainer form .inputContainer .fa-circle-exclamation {
+  color: #c00;
+  visibility: hidden;
+}
+
+header .header__modalContainer form .inputContainer .show {
+  visibility: visible;
+}
+
+header .header__modalContainer form .inputContainer .errMessage {
+  color: #c00;
+  visibility: hidden;
+}
+
+header .header__modalContainer form .succes input {
+  border-color: #0c0;
+}
+
+header .header__modalContainer form .succes .fa-circle-check {
+  visibility: visible;
+}
+
+header .header__modalContainer form .error input {
+  border-color: #c00;
+}
+
+header .header__modalContainer form .error .fa-circle-exclamation,
+header .header__modalContainer form .error .errMessage {
+  visibility: visible;
 }
 
 header .header__modalContainer form button {

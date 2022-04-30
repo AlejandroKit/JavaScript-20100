@@ -94,7 +94,7 @@ header {
             }
 
             .form__span-margin {
-                margin: .5em 0 .1em 0;
+                margin: 1.5em 0 .1em 0;
             }
 
             input,
@@ -120,6 +120,62 @@ header {
                 resize: none;
                 font-size: 1.5em;
                 font-weight: lighter;
+            }
+
+            .inputContainer {
+                position: relative;
+
+                input {
+                    display: block;
+                    width: 100%;
+                }
+
+                .fa-solid {
+                    font-size: 1.5em;
+                    position: absolute;
+                    top: 7px;
+                    right: 0;
+                }
+
+                .fa-circle-check {
+                    color: #0c0;
+                    visibility: hidden;
+                }
+
+                .fa-circle-exclamation {
+                    color: #c00;
+                    visibility: hidden;
+                }
+
+                .show {
+                    visibility: visible;
+                }
+
+                .errMessage {
+                    color: #c00;
+                    visibility: hidden;
+                }
+            }
+
+            .succes {
+                input {
+                    border-color: #0c0;
+                }
+
+                .fa-circle-check {
+                    visibility: visible;
+                }
+            }
+
+            .error {
+                input {
+                    border-color: #c00;
+                }
+
+                .fa-circle-exclamation,
+                .errMessage {
+                    visibility: visible;
+                }
             }
 
             button {

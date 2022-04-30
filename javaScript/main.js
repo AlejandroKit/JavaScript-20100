@@ -1,5 +1,3 @@
-let respuesta; //variable para confirmar si el usuario ingresó una variable valida
-
 // funcion que retorna un array de eventos en el session storage
 validarStorage = () => {
     if (localStorage.getItem('eventos') != null) {
@@ -13,14 +11,14 @@ let listaEventos = validarStorage(); //array de los Eventos (objetos) con toda s
 // guarda en el array de eventos los datos del data.json, no los guarda antes de que se escriba el mes asi que para ver el evento de abril tienes que cambiar de mes y volver
 
 // creo una lista con los eventos traidos del data.json porque si los pongo en el array anterior se duplican en el storage y terminan duplicandose estos eventos cada vez que el usuario agrega uno
-const listaEventosPred=[]
+const listaEventosPred = [];
 fetch('./javaScript/data/data.json')
-.then((res) => res.json())
-.then((data) => {
-    data.forEach((evento) => {
-        listaEventosPred.push(evento);
+    .then((res) => res.json())
+    .then((data) => {
+        data.forEach((evento) => {
+            listaEventosPred.push(evento);
+        });
     });
-});
 
 const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -66,8 +64,10 @@ const cuantosDias = (mes) => {
         return 31;
     } else if (mes == 3 || mes == 5 || mes == 8 || mes == 10) {
         return 30;
-    } else {
+    } else if (mes == 1) {
         return añoBisiesto() ? 29 : 28;
+    } else {
+        return null;
     }
 };
 
@@ -103,7 +103,7 @@ const escribirMes = (mes) => {
 
     // llamo a agregar al DOM todos los eventos del mes para que se impriman cada que aparece el mes
     listaEventos.forEach((evento) => {
-        (evento.mes == mes + 1 & evento.año==añoActual) && agregarAlCalendario(evento);
+        (evento.mes == mes + 1) & (evento.año == añoActual) && agregarAlCalendario(evento);
     });
 
     // llamo a agregar al DOM todos los eventos (del data.json) del mes para que se impriman cada que aparece el mes
@@ -118,10 +118,10 @@ const escribirMes = (mes) => {
         casillas.addEventListener('click', () => {
             panel.innerHTML = '';
             // guardo los eventos del usuario y los de data.json en dos arrays para concatenarlos y de ese tercer array hacer toda la operacion de impirimir en el panel
-            let eventosUsuario = listaEventos.filter((evento) => evento.dia == i && evento.mes == mesActual + 1 &&evento.año==añoActual);
-            let eventosPred = listaEventosPred.filter((evento) => evento.dia == i && evento.mes == mesActual + 1 );
+            let eventosUsuario = listaEventos.filter((evento) => evento.dia == i && evento.mes == mesActual + 1 && evento.año == añoActual);
+            let eventosPred = listaEventosPred.filter((evento) => evento.dia == i && evento.mes == mesActual + 1);
 
-            let datosDelEvento=eventosUsuario.concat(eventosPred)
+            let datosDelEvento = eventosUsuario.concat(eventosPred);
             // console.log(datosDelEvento);
             datosDelEvento.forEach((evento) => {
                 panel.innerHTML += `<div class="eventoDetalle">   
@@ -172,25 +172,11 @@ class evento {
     constructor(titulo, mes, dia, año, descripcion) {
         this.mes = mes;
         this.dia = dia;
-        this.año=año
+        this.año = año;
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
 }
-
-//Aqui selecciono el modal que quiero usar como formulario emergente para agendar el evento y el boton que lo va a "llamar a hacer pop-up" y aparecer
-let formContainer = document.getElementById('formContainer'); //container del formulario emergente
-let btn_form = document.getElementById('openForm'); //boton de open para que emerga el formulario
-btn_form.addEventListener('click', () => {
-    //en esta funcion agrego la clase "show" al container para que le agregue opacity:1 y que se vea (visitar _header.scss para verlo)
-    formContainer.classList.add('show');
-    document.getElementById('mes_inp').focus();
-
-    let cerrarVentana = document.getElementById('closeForm'); //selecciono la "X" del formulario para poder quitarle la clase "show" al container y que se vuelva invicible de nuevo
-    cerrarVentana.addEventListener('click', () => {
-        formContainer.classList.remove('show');
-    });
-});
 
 // funciones para ordenar los eventos (antes había una lista en donde se podía ver los eventos ordenados en orden cronologico pero esa funcion se eliminó), ahora solo sirve por mero amor al orden
 const ordenarDias = (a, b) => {
@@ -212,65 +198,117 @@ const ordenarMes = (a, b) => {
     }
 };
 
-//función para crear y agendar eventos
-let btn_agendar = document.getElementById('btnAgendar');
-btn_agendar.addEventListener('click', () => {
-    let nuevoEventoMes;
+//Aqui selecciono el modal que quiero usar como formulario emergente para agendar el evento y el boton que lo va a "llamar a hacer pop-up" y aparecer
+let formContainer = document.getElementById('formContainer'); //container del formulario emergente
+let btn_form = document.getElementById('openForm'); //boton de open para que emerga el formulario
+btn_form.addEventListener('click', () => {
+    //en esta funcion agrego la clase "show" al container para que le agregue opacity:1 y que se vea (visitar _header.scss para verlo)
+    formContainer.classList.add('show');
+    document.getElementById('mes_inp').focus();
 
-    do {
-        nuevoEventoMes = document.getElementById('mes_inp').value;
-        if (1 <= nuevoEventoMes && nuevoEventoMes <= 12) {
-            respuesta = true;
-        } else {
-            document.getElementById('mes_inp').value = '1';
-            respuesta = false;
-        }
-    } while (respuesta == false);
-    let cantDiasDelMes = cuantosDias(nuevoEventoMes);
-    let nuevoEventoDia;
-    do {
-        nuevoEventoDia = document.getElementById('dia_inp').value;
-        if (0 < nuevoEventoDia && nuevoEventoDia <= cantDiasDelMes) {
-            respuesta = true;
-        } else {
-            // alert('Maestro, no hay tantos dias en ese mes');
-            respuesta = false;
-        }
-    } while (respuesta == false);
-
-    //tomo los valores de los inputs de titulo y desc
-    let nuevoEventoTitulo = document.getElementById('titulo_inp').value;
-    let nuevoEventoDescr = document.getElementById('desc_inp').value;
-    let nuevoEventoAño=añoActual
-
-    //agendo el evento nuevo en la lista con toda la info del form
-    const eventoNuevo = new evento(nuevoEventoTitulo, nuevoEventoMes, nuevoEventoDia,nuevoEventoAño, nuevoEventoDescr);
-    listaEventos.push(eventoNuevo);
-    listaEventos.sort(ordenarDias);
-    listaEventos.sort(ordenarMes);
-
-    //guardo la lista de eventos en el local storage
-    const eventosJSON = JSON.stringify(listaEventos);
-    localStorage.setItem('eventos', eventosJSON);
-
-    //este pequeño if es para que al agendar eventos en otro mes no vuelva a agregar al calendario eventos del mes que se esté viendo
-    nuevoEventoMes == mesActual + 1 && agregarAlCalendario(eventoNuevo);
-
-    //limpio los inputs para que al agendar y volver a abrir el formulario esten todos los inputs vacios
-    document.getElementById('mes_inp').value = '';
-    document.getElementById('dia_inp').value = '';
-    document.getElementById('titulo_inp').value = '';
-    document.getElementById('desc_inp').value = '';
-    //esto es para que al agendar evento tambien desaparezca el formulario
-    formContainer.classList.remove('show');
-
-    Toastify({
-        text: `Evento ${nuevoEventoTitulo} agendado`,
-        gravity: 'top',
-        position: 'right',
-        style: {
-            background: 'linear-gradient(45deg, #f1f, #a15)',
-        },
-    }).showToast();
+    let cerrarVentana = document.getElementById('closeForm'); //selecciono la "X" del formulario para poder quitarle la clase "show" al container y que se vuelva invicible de nuevo
+    cerrarVentana.addEventListener('click', () => {
+        formContainer.classList.remove('show');
+    });
 });
 
+const form = document.getElementById('form');
+const mes_input = document.getElementById('mes_inp');
+const dia_input = document.getElementById('dia_inp');
+let respuesta; //variable para confirmar si el usuario ingresó una variable valida
+let respuesta2; //variable para confirmar si el usuario ingresó una variable valida
+
+// IMPORTANTE
+// bueno, no es tan importante pero para entender mejor el flujo de logica recomiendo leer desde el evento agregado a form, y desde la parte de checkInputs hacia arriba porque va llamando una funcion que llama a otra y como son funciones flechas quedaron escritas en orden inverso del de ejecucion
+
+const setSuccesFor = (input) => {
+    const inputContainer = input.parentElement;
+    inputContainer.classList.remove('error');
+    inputContainer.classList.add('succes');
+};
+
+const setErrorFor = (input, errMessage) => {
+    const inputContainer = input.parentElement;
+    const errorTag = inputContainer.querySelector('small');
+    inputContainer.classList.remove('succes');
+    inputContainer.classList.add('error');
+    errorTag.innerHTML = errMessage;
+};
+
+const checkInputs = () => {
+    const mes_input_value = parseInt(mes_input.value.trim());
+    const dia_input_value = parseInt(dia_input.value.trim());
+
+    if (mes_input_value <= 12) {
+        setSuccesFor(mes_input);
+        respuesta = true;
+    } else {
+        setErrorFor(mes_input, 'No hay tantos meses flaco');
+        respuesta = false;
+    }
+
+    if (cuantosDias(mes_input_value) == null) {
+        setErrorFor(dia_input, 'No hay dias ese mes');
+    } else if (dia_input_value <= cuantosDias(mes_input_value)) {
+        setSuccesFor(dia_input);
+        respuesta2 = true;
+    } else {
+        setErrorFor(dia_input, 'No hay tantos dias ese mes flaco');
+        respuesta2 = false;
+    }
+
+    return (res = respuesta == true && respuesta2 == true);
+};
+
+form.addEventListener('submit', (e) => {
+    // al clickear el boton verificara que los valores de mes y día tenga sentido
+    e.preventDefault();
+    checkInputs();
+
+    // cuando los valores para mes y dia tengan sentido entrara a este if y se efecutara todo el proceso de creacion de un evento nuevo
+    if (res) {
+        //tomo los valores de los inputs de mes, dia, titulo y desc
+        let nuevoEventoMes = document.getElementById('mes_inp').value.trim();
+        let nuevoEventoDia = document.getElementById('dia_inp').value.trim();
+        let nuevoEventoTitulo = document.getElementById('titulo_inp').value.trim();
+        let nuevoEventoDescr = document.getElementById('desc_inp').value.trim();
+        let nuevoEventoAño = añoActual;
+
+        //agendo el evento nuevo en la lista con toda la info del form
+        const eventoNuevo = new evento(nuevoEventoTitulo, nuevoEventoMes, nuevoEventoDia, nuevoEventoAño, nuevoEventoDescr);
+        listaEventos.push(eventoNuevo);
+        listaEventos.sort(ordenarDias);
+        listaEventos.sort(ordenarMes);
+
+        //guardo la lista de eventos en el local storage
+        const eventosJSON = JSON.stringify(listaEventos);
+        localStorage.setItem('eventos', eventosJSON);
+
+        //este pequeño if es para que al agendar eventos en otro mes no vuelva a agregar al calendario eventos del mes que se esté viendo
+        nuevoEventoMes == mesActual + 1 && agregarAlCalendario(eventoNuevo);
+
+        //limpio los inputs para que al agendar y volver a abrir el formulario esten todos los inputs vacios
+        document.getElementById('mes_inp').value = '';
+        document.getElementById('dia_inp').value = '';
+        document.getElementById('titulo_inp').value = '';
+        document.getElementById('desc_inp').value = '';
+
+        // quito los icon de succes
+        const mesInputContainer = document.getElementById('mesInputContainer');
+        const diaInputContainer = document.getElementById('diaInputContainer');
+        mesInputContainer.classList.remove('succes');
+        diaInputContainer.classList.remove('succes');
+
+        //esto es para que al agendar evento tambien desaparezca el formulario
+        formContainer.classList.remove('show');
+
+        Toastify({
+            text: `Evento ${nuevoEventoTitulo} agendado`,
+            gravity: 'top',
+            position: 'right',
+            style: {
+                background: 'linear-gradient(45deg, #f1f, #a15)',
+            },
+        }).showToast();
+    }
+});

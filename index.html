@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Playfair+Display:ital@1&family=Teko:wght@500&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Lora&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+        <script src="https://kit.fontawesome.com/ba08c4b47c.js" crossorigin="anonymous"></script>
         <link rel="icon" href="images/Greiff Calender-logos.jpeg" />
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -18,17 +19,27 @@
     <body>
         <header id="header">
             <div id="formContainer" class="header__modalContainer">
-                <form action="">
+                <form id="form" class="form">
                     <button id="closeForm" type="button">X</button>
                     <span>Mes:</span>
-                    <input id="mes_inp" type="text" autocomplete="off" />
+                    <div id="mesInputContainer" class="inputContainer">
+                        <input id="mes_inp" type="text" autocomplete="off" />
+                            <i class="fa-solid fa-circle-check"></i>
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <small class="errMessage">Error message</small>
+                    </div>
                     <span class="form__span-margin">Día:</span>
-                    <input id="dia_inp" type="text" autocomplete="off" />
+                    <div id="diaInputContainer" class="inputContainer">
+                        <input id="dia_inp" type="text" autocomplete="off" />
+                            <i class="fa-solid fa-circle-check"></i>
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <small class="errMessage">Error message</small>
+                    </div>
                     <span class="form__span-margin">Titulo:</span>
                     <input id="titulo_inp" type="text" autocomplete="off" />
                     <span class="form__span-margin">Descripción:</span>
                     <textarea name="" id="desc_inp" cols="30" rows="10" autocomplete="off"></textarea>
-                    <button id="btnAgendar" type="button">Enviar</button>
+                    <button id="btnAgendar" type="submit">Enviar</button>
                 </form>
             </div>
             
