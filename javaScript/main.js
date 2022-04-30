@@ -209,10 +209,18 @@ btn_form.addEventListener('click', () => {
     let cerrarVentana = document.getElementById('closeForm'); //selecciono la "X" del formulario para poder quitarle la clase "show" al container y que se vuelva invicible de nuevo
     cerrarVentana.addEventListener('click', () => {
         formContainer.classList.remove('show');
+        mesInputContainer.classList.remove('error');
+        diaInputContainer.classList.remove('error');
+        document.getElementById('mes_inp').value = '';
+        document.getElementById('dia_inp').value = '';
+        document.getElementById('titulo_inp').value = '';
+        document.getElementById('desc_inp').value = '';
     });
 });
 
 const form = document.getElementById('form');
+const mesInputContainer = document.getElementById('mesInputContainer');
+const diaInputContainer = document.getElementById('diaInputContainer');
 const mes_input = document.getElementById('mes_inp');
 const dia_input = document.getElementById('dia_inp');
 let respuesta; //variable para confirmar si el usuario ingresó una variable valida
@@ -294,8 +302,6 @@ form.addEventListener('submit', (e) => {
         document.getElementById('desc_inp').value = '';
 
         // quito los icon de succes
-        const mesInputContainer = document.getElementById('mesInputContainer');
-        const diaInputContainer = document.getElementById('diaInputContainer');
         mesInputContainer.classList.remove('succes');
         diaInputContainer.classList.remove('succes');
 
