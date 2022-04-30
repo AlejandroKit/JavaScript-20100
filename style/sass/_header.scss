@@ -94,7 +94,7 @@ header {
             }
 
             .form__span-margin {
-                margin: 1.5em 0 .1em 0;
+                margin: .5em 0 .1em 0;
             }
 
             input,
@@ -147,13 +147,13 @@ header {
                     visibility: hidden;
                 }
 
-                .show {
-                    visibility: visible;
-                }
-
                 .errMessage {
                     color: #c00;
                     visibility: hidden;
+                }
+
+                small {
+                    font-size: 1em;
                 }
             }
 

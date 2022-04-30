@@ -99,7 +99,7 @@ header .header__modalContainer form span {
 }
 
 header .header__modalContainer form .form__span-margin {
-  margin: 1.5em 0 .1em 0;
+  margin: .5em 0 .1em 0;
 }
 
 header .header__modalContainer form input,
@@ -153,13 +153,13 @@ header .header__modalContainer form .inputContainer .fa-circle-exclamation {
   visibility: hidden;
 }
 
-header .header__modalContainer form .inputContainer .show {
-  visibility: visible;
-}
-
 header .header__modalContainer form .inputContainer .errMessage {
   color: #c00;
   visibility: hidden;
+}
+
+header .header__modalContainer form .inputContainer small {
+  font-size: 1em;
 }
 
 header .header__modalContainer form .succes input {
